@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: bankalite
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bankalite
+    username: bank
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
