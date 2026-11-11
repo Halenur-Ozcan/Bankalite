@@ -22,4 +22,8 @@ public class AuthController {
     public AuthResponse login(@Valid @RequestBody LoginRequest request) {
         return userService.login(request);
     }
+    @GetMapping("/me")
+    public String me(java.security.Principal principal) {
+        return "Merhaba, " + principal.getName();
+    }
 }
