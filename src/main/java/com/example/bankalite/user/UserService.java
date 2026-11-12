@@ -5,7 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.bankalite.common.BusinessException;
+import org.springframework.http.HttpStatus;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -23,7 +24,8 @@ public class UserService {
     public UserResponse register(RegisterRequest request) {
 
         if (userRepository.existsByUsername(request.username())) {
-            throw new IllegalArgumentException("Bu kullanıcı adı zaten alınmış: " + request.username());
+            //throw new IllegalArgumentException("Bu kullanıcı adı zaten alınmış: " + request.username());
+            throw new BusinessException("Bu kullanıcı adı zaten alınmış: " + request.username(), HttpStatus.CONFLICT);
         }
 
         String hashedPassword = passwordEncoder.encode(request.password());
